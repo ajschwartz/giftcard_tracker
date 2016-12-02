@@ -16,7 +16,7 @@
 
       <% @giftings.each do |gifting| %>
       <tr>
-        <td><%= gifting.giver_id %></td>
+        <td><%= gifting.giver.name %></td>
         <td><%= gifting.giftcard_id %></td>
         <td>
           <a href="/giftings/<%= gifting.id %>" class="btn btn-primary">Show</a>

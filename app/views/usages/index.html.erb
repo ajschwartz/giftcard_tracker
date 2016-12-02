@@ -13,23 +13,24 @@
         <th>Date</th>
         <th>Purchase</th>
         <th>Amount</th>
-        <th>User</th>
         <th>Actions</th>
       </tr>
 
       <% @usages.each do |usage| %>
+      <% if usage.user_id == current_user.id %>
       <tr>
         <td><%= usage.giftcard_id %></td>
         <td><%= usage.date %></td>
         <td><%= usage.purchase %></td>
         <td><%= usage.amount %></td>
-        <td><%= usage.user_id %></td>
         <td>
           <a href="/usages/<%= usage.id %>" class="btn btn-primary">Show</a>
           <a href="/usages/<%= usage.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_usage/<%= usage.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
+      <% else %>
+      <% end %>
       <% end %>
     </table>
   </div>

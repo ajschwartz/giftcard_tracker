@@ -11,21 +11,22 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>User</th>
         <th>Actions</th>
       </tr>
 
       <% @givers.each do |giver| %>
+      <% if giver.user_id == current_user.id %>
       <tr>
         <td><%= giver.name %></td>
         <td><%= giver.email %></td>
-        <td><%= giver.user_id %></td>
         <td>
           <a href="/givers/<%= giver.id %>" class="btn btn-primary">Show</a>
           <a href="/givers/<%= giver.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_giver/<%= giver.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
+      <% else %>
+      <% end %>
       <% end %>
     </table>
   </div>

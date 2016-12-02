@@ -19,13 +19,8 @@
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @giftcard.user_id %>">
-      </div>
+        <input type="hidden" id="user_id" name="user_id" value="<%= @giftcard.user_id %>">
 
       <!-- Label and input for amount -->
       <div class="form-group">
@@ -36,22 +31,31 @@
         <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @giftcard.amount %>">
       </div>
 
-      <!-- Label and input for date -->
-      <div class="form-group">
-        <label for="date" class="control-label">
-          Date
-        </label>
-
-        <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @giftcard.date %>">
-      </div>
-
       <!-- Label and input for retailer_id -->
       <div class="form-group">
         <label for="retailer_id" class="control-label">
           Retailer
         </label>
 
-        <input type="text" id="retailer_id" name="retailer_id" placeholder="Retailer" class="form-control" value="<%= @giftcard.retailer_id %>">
+        <%= select_tag(:retailer_id, options_from_collection_for_select(Retailer.all, :id, :name, @giftcard.retailer_id), :class => "form-control") %>
+      </div>
+
+      <!-- Label and input for date -->
+      <div class="form-group">
+        <label for="date" class="control-label">
+          Date Received
+        </label>
+
+        <input type="date" class='form-control' id="date" name="date" value="<%= @giftcard.date %>">
+      </div>
+
+      <!-- Label and input for theme_id -->
+      <div class="form-group">
+        <label for="theme_id" class="control-label">
+          Theme
+        </label>
+
+        <%= select_tag(:theme_id, options_from_collection_for_select(Theme.all, :id, :category, @giftcard.theme_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for code -->
@@ -69,16 +73,16 @@
           Expiration
         </label>
 
-        <input type="text" id="expiration" name="expiration" placeholder="Expiration" class="form-control" value="<%= @giftcard.expiration %>">
+        <input type="date" class='form-control' id="expiration" name="expiration" value="<%= @giftcard.expiration %>">
       </div>
 
       <!-- Label and input for cardcvv -->
       <div class="form-group">
         <label for="cardcvv" class="control-label">
-          Cardcvv
+          Card CVV
         </label>
 
-        <input type="text" id="cardcvv" name="cardcvv" placeholder="Cardcvv" class="form-control" value="<%= @giftcard.cardcvv %>">
+        <input type="text" id="cardcvv" name="cardcvv" placeholder="Card CVV" class="form-control" value="<%= @giftcard.cardcvv %>">
       </div>
 
       <!-- Label and input for notes -->
@@ -88,15 +92,6 @@
         </label>
 
         <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @giftcard.notes %></textarea>
-      </div>
-
-      <!-- Label and input for theme_id -->
-      <div class="form-group">
-        <label for="theme_id" class="control-label">
-          Theme
-        </label>
-
-        <input type="text" id="theme_id" name="theme_id" placeholder="Theme" class="form-control" value="<%= @giftcard.theme_id %>">
       </div>
 
       <button class="btn btn-warning">

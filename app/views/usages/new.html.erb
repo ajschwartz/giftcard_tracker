@@ -33,7 +33,7 @@
           Date
         </label>
 
-        <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @usage.date %>">
+        <input type="date" id="date" name="date" placeholder="Date" class="form-control" value="<%= @usage.date %>">
       </div>
 
       <!-- Label and input for purchase -->
@@ -55,13 +55,7 @@
       </div>
 
       <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @usage.user_id %>">
-      </div>
+        <input type="hidden" id="user_id" name="user_id" value="<%= @usage.user_id %>">
 
       <button class="btn btn-success">
         Create Usage

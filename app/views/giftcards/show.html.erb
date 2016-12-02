@@ -6,7 +6,7 @@
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
       <dt>User</dt>
-      <dd><%= @giftcard.user_id %></dd>
+      <dd><%= @giftcard.user.username %></dd>
 
       <dt>Amount</dt>
       <dd><%= @giftcard.amount %></dd>
@@ -15,7 +15,7 @@
       <dd><%= @giftcard.date %></dd>
 
       <dt>Retailer</dt>
-      <dd><%= @giftcard.retailer_id %></dd>
+      <dd><%= @giftcard.retailer.name %></dd>
 
       <dt>Code</dt>
       <dd><%= @giftcard.code %></dd>
@@ -23,14 +23,14 @@
       <dt>Expiration</dt>
       <dd><%= @giftcard.expiration %></dd>
 
-      <dt>Cardcvv</dt>
+      <dt>Card CVV</dt>
       <dd><%= @giftcard.cardcvv %></dd>
 
       <dt>Notes</dt>
       <dd><%= @giftcard.notes %></dd>
 
       <dt>Theme</dt>
-      <dd><%= @giftcard.theme_id %></dd>
+      <dd><%= @giftcard.theme.category %></dd>
 
     </dl>
 

@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'bootstrap-datepicker-rails'
+
 gem "devise"
 gem 'starter_generators', :git => 'https://github.com/raghubetina/starter_generators.git'
 

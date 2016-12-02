@@ -15,29 +15,32 @@
         <th>Retailer</th>
         <th>Code</th>
         <th>Expiration</th>
-        <th>Cardcvv</th>
+        <th>Card CVV</th>
         <th>Notes</th>
         <th>Theme</th>
         <th>Actions</th>
       </tr>
 
       <% @giftcards.each do |giftcard| %>
+      <% if giftcard.user_id == current_user.id %>
       <tr>
-        <td><%= giftcard.user_id %></td>
+        <td><%= giftcard.user.username %></td>
         <td><%= giftcard.amount %></td>
         <td><%= giftcard.date %></td>
-        <td><%= giftcard.retailer_id %></td>
+        <td><%= giftcard.retailer.name %></td>
         <td><%= giftcard.code %></td>
         <td><%= giftcard.expiration %></td>
         <td><%= giftcard.cardcvv %></td>
         <td><%= giftcard.notes %></td>
-        <td><%= giftcard.theme_id %></td>
+        <td><%= giftcard.theme.category %></td>
         <td>
           <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary">Show</a>
           <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_giftcard/<%= giftcard.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
+      <% else %>
+      <% end %>
       <% end %>
     </table>
   </div>

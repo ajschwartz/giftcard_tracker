@@ -7,6 +7,7 @@ class Giftcard < ActiveRecord::Base
 
     has_many :usages
     belongs_to :retailer
+    belongs_to :user
     belongs_to :theme
     has_many :gifters, :through => :giftings, :source => :giver
 
