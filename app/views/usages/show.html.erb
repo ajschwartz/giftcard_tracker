@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h3>Usage #<%= @usage.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Giftcard</dt>
+      <dd><%= @usage.giftcard_id %></dd>
+
+      <dt>Date</dt>
+      <dd><%= @usage.date %></dd>
+
+      <dt>Purchase</dt>
+      <dd><%= @usage.purchase %></dd>
+
+      <dt>Amount</dt>
+      <dd><%= @usage.amount %></dd>
+
+      <dt>User</dt>
+      <dd><%= @usage.user_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/usages" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/usages/<%= @usage.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_usage/<%= @usage.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

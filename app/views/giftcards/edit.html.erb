@@ -1,0 +1,109 @@
+<!-- Validation failure messages -->
+<% if @giftcard.errors.any? %>
+  <% @giftcard.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Giftcard #<%= @giftcard.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_giftcard/<%= @giftcard.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @giftcard.user_id %>">
+      </div>
+
+      <!-- Label and input for amount -->
+      <div class="form-group">
+        <label for="amount" class="control-label">
+          Amount
+        </label>
+
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @giftcard.amount %>">
+      </div>
+
+      <!-- Label and input for date -->
+      <div class="form-group">
+        <label for="date" class="control-label">
+          Date
+        </label>
+
+        <input type="text" id="date" name="date" placeholder="Date" class="form-control" value="<%= @giftcard.date %>">
+      </div>
+
+      <!-- Label and input for retailer_id -->
+      <div class="form-group">
+        <label for="retailer_id" class="control-label">
+          Retailer
+        </label>
+
+        <input type="text" id="retailer_id" name="retailer_id" placeholder="Retailer" class="form-control" value="<%= @giftcard.retailer_id %>">
+      </div>
+
+      <!-- Label and input for code -->
+      <div class="form-group">
+        <label for="code" class="control-label">
+          Code
+        </label>
+
+        <input type="text" id="code" name="code" placeholder="Code" class="form-control" value="<%= @giftcard.code %>">
+      </div>
+
+      <!-- Label and input for expiration -->
+      <div class="form-group">
+        <label for="expiration" class="control-label">
+          Expiration
+        </label>
+
+        <input type="text" id="expiration" name="expiration" placeholder="Expiration" class="form-control" value="<%= @giftcard.expiration %>">
+      </div>
+
+      <!-- Label and input for cardcvv -->
+      <div class="form-group">
+        <label for="cardcvv" class="control-label">
+          Cardcvv
+        </label>
+
+        <input type="text" id="cardcvv" name="cardcvv" placeholder="Cardcvv" class="form-control" value="<%= @giftcard.cardcvv %>">
+      </div>
+
+      <!-- Label and input for notes -->
+      <div class="form-group">
+        <label for="notes" class="control-label">
+          Notes
+        </label>
+
+        <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @giftcard.notes %></textarea>
+      </div>
+
+      <!-- Label and input for theme_id -->
+      <div class="form-group">
+        <label for="theme_id" class="control-label">
+          Theme
+        </label>
+
+        <input type="text" id="theme_id" name="theme_id" placeholder="Theme" class="form-control" value="<%= @giftcard.theme_id %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Giftcard
+      </button>
+      or
+      <a href="/giftcards/<%= @giftcard.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @gifting.errors.any? %>
+  <% @gifting.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Gifting</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_gifting" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for giver_id -->
+      <div class="form-group">
+        <label for="giver_id" class="control-label">
+          Giver
+        </label>
+
+        <input type="text" id="giver_id" name="giver_id" placeholder="Giver" class="form-control" value="<%= @gifting.giver_id %>">
+      </div>
+
+      <!-- Label and input for giftcard_id -->
+      <div class="form-group">
+        <label for="giftcard_id" class="control-label">
+          Giftcard
+        </label>
+
+        <input type="text" id="giftcard_id" name="giftcard_id" placeholder="Giftcard" class="form-control" value="<%= @gifting.giftcard_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Gifting
+      </button>
+      or
+      <a href="/giftings">Cancel</a>
+    </form>
+  </div>
+</div>

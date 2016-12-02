@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h3>Gifting #<%= @gifting.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Giver</dt>
+      <dd><%= @gifting.giver_id %></dd>
+
+      <dt>Giftcard</dt>
+      <dd><%= @gifting.giftcard_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/giftings" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/giftings/<%= @gifting.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_gifting/<%= @gifting.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

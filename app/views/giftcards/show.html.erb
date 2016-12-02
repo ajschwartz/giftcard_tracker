@@ -1,0 +1,49 @@
+<div class="page-header">
+  <h3>Giftcard #<%= @giftcard.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>User</dt>
+      <dd><%= @giftcard.user_id %></dd>
+
+      <dt>Amount</dt>
+      <dd><%= @giftcard.amount %></dd>
+
+      <dt>Date</dt>
+      <dd><%= @giftcard.date %></dd>
+
+      <dt>Retailer</dt>
+      <dd><%= @giftcard.retailer_id %></dd>
+
+      <dt>Code</dt>
+      <dd><%= @giftcard.code %></dd>
+
+      <dt>Expiration</dt>
+      <dd><%= @giftcard.expiration %></dd>
+
+      <dt>Cardcvv</dt>
+      <dd><%= @giftcard.cardcvv %></dd>
+
+      <dt>Notes</dt>
+      <dd><%= @giftcard.notes %></dd>
+
+      <dt>Theme</dt>
+      <dd><%= @giftcard.theme_id %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/giftcards" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/giftcards/<%= @giftcard.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_giftcard/<%= @giftcard.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

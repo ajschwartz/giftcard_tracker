@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>
+    Themes
+    <a href="/themes/new" class="btn btn-lg btn-success">New Theme</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Category</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @themes.each do |theme| %>
+      <tr>
+        <td><%= theme.category %></td>
+        <td>
+          <a href="/themes/<%= theme.id %>" class="btn btn-primary">Show</a>
+          <a href="/themes/<%= theme.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_theme/<%= theme.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

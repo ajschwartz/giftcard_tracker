@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h1>
+    Giftings
+    <a href="/giftings/new" class="btn btn-lg btn-success">New Gifting</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Giver</th>
+        <th>Giftcard</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @giftings.each do |gifting| %>
+      <tr>
+        <td><%= gifting.giver_id %></td>
+        <td><%= gifting.giftcard_id %></td>
+        <td>
+          <a href="/giftings/<%= gifting.id %>" class="btn btn-primary">Show</a>
+          <a href="/giftings/<%= gifting.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_gifting/<%= gifting.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
