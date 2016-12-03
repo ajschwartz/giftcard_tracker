@@ -9,7 +9,7 @@
   <div class="col-md-12">
     <table class="table table-striped table-hover">
       <tr>
-        <th>Giftcard</th>
+        <th>Giftcard #</th>
         <th>Date</th>
         <th>Purchase</th>
         <th>Amount</th>
@@ -17,9 +17,9 @@
       </tr>
 
       <% @usages.each do |usage| %>
-      <% if usage.user_id == current_user.id %>
+      <% if usage.giftcard.user_id == current_user.id %>
       <tr>
-        <td><%= usage.giftcard_id %></td>
+        <td><%= usage.giftcard.code %></td>
         <td><%= usage.date %></td>
         <td><%= usage.purchase %></td>
         <td><%= usage.amount %></td>

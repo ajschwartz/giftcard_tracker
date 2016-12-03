@@ -33,7 +33,7 @@
           Giftcard
         </label>
 
-        <input type="text" id="giftcard_id" name="giftcard_id" placeholder="Need to input dropdown" class="form-control" value="<%= @gifting.giftcard_id %>">
+        <%= select_tag(:giftcard_id, options_from_collection_for_select(Giftcard.where("user_id = ?", current_user.id), :id, :code, @gifting.giftcard_id), :class => "form-control") %>
       </div>
 
       <button class="btn btn-success">

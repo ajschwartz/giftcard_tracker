@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  root to: "giftcards#index"
+  root to: "homepage#landing"
+
+  # Routes for the HOMEPAGE:
+  get "/", :controller => "homepage", :action => "landing"
 
   # Routes for the Retailer resource:
   # CREATE

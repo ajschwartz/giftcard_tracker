@@ -10,20 +10,25 @@
     <table class="table table-striped table-hover">
       <tr>
         <th>Giver</th>
-        <th>Giftcard</th>
+        <th>Giftcard #</th>
+        <th>Date Received</th>
         <th>Actions</th>
       </tr>
 
       <% @giftings.each do |gifting| %>
+      <% if gifting.giftcard.user_id == current_user.id %>
       <tr>
         <td><%= gifting.giver.name %></td>
-        <td><%= gifting.giftcard_id %></td>
+        <td><%= gifting.giftcard.code %></td>
+        <td><%= gifting.giftcard.date %></td>
         <td>
           <a href="/giftings/<%= gifting.id %>" class="btn btn-primary">Show</a>
           <a href="/giftings/<%= gifting.id %>/edit" class="btn btn-warning">Edit</a>
           <a href="/delete_gifting/<%= gifting.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
         </td>
       </tr>
+      <% else %>
+      <% end %>
       <% end %>
     </table>
   </div>
