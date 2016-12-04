@@ -24,7 +24,7 @@
           Giftcard
         </label>
 
-        <%= select_tag(:giftcard_id, options_from_collection_for_select(Giftcard.where("user_id = ?", current_user.id), :id, :code, @usage.giftcard_id), :class => "form-control") %>
+        <%= select_tag(:giftcard_id, options_from_collection_for_select(Giftcard.where("user_id = ?", current_user.id), :id, :card_display, @usage.giftcard_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for date -->

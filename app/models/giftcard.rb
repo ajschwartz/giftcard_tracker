@@ -11,4 +11,8 @@ class Giftcard < ActiveRecord::Base
     belongs_to :theme
     has_many :gifters, :through => :giftings, :source => :giver
 
+    def card_display
+      "#{retailer.name}, #{ActionController::Base.helpers.number_to_currency(amount)}"
+    end
+
 end

@@ -8,31 +8,62 @@
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped table-hover">
-      <tr>
-        <th>User</th>
+      <tr class="andy-center">
         <th>Amount</th>
-        <th>Date</th>
         <th>Retailer</th>
-        <th>Code</th>
+        <th>Date Received</th>
         <th>Expiration</th>
-        <th>Card CVV</th>
         <th>Notes</th>
-        <th>Theme</th>
         <th>Actions</th>
       </tr>
 
       <% @giftcards.each do |giftcard| %>
-      <% if giftcard.user_id == current_user.id %>
+      <% if giftcard.user_id == current_user.id && giftcard.amount != 0 %>
       <tr>
-        <td><%= giftcard.user.username %></td>
-        <td><%= giftcard.amount %></td>
-        <td><%= giftcard.date %></td>
+        <td><%= number_to_currency(giftcard.amount) %></td>
         <td><%= giftcard.retailer.name %></td>
-        <td><%= giftcard.code %></td>
+        <td><%= giftcard.date.to_formatted_s(:long)%></td>
         <td><%= giftcard.expiration %></td>
-        <td><%= giftcard.cardcvv %></td>
         <td><%= giftcard.notes %></td>
-        <td><%= giftcard.theme.category %></td>
+        <td>
+          <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary">Show</a>
+          <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_giftcard/<%= giftcard.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% else %>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="well">
+      <strong> Used Gift Cards </strong>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr class="andy-center">
+        <th>Retailer</th>
+        <th>Amount</th>
+        <th>Date Received</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @giftcards.each do |giftcard| %>
+      <% if giftcard.amount == 0 %>
+      <tr>
+        <td><%= giftcard.retailer.name %></td>
+        <td><%= number_to_currency(giftcard.amount) %></td>
+        <td><%= giftcard.date.to_formatted_s(:long)%></td>
+        <td><%= giftcard.notes %></td>
         <td>
           <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary">Show</a>
           <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning">Edit</a>

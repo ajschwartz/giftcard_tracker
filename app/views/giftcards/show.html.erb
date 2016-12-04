@@ -9,10 +9,10 @@
       <dd><%= @giftcard.user.username %></dd>
 
       <dt>Amount</dt>
-      <dd><%= @giftcard.amount %></dd>
+      <dd><%= number_to_currency(@giftcard.amount) %></dd>
 
       <dt>Date</dt>
-      <dd><%= @giftcard.date %></dd>
+      <dd><%= @giftcard.date.to_formatted_s(:long) %></dd>
 
       <dt>Retailer</dt>
       <dd><%= @giftcard.retailer.name %></dd>

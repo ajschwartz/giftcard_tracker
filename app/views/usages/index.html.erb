@@ -20,9 +20,9 @@
       <% if usage.giftcard.user_id == current_user.id %>
       <tr>
         <td><%= usage.giftcard.code %></td>
-        <td><%= usage.date %></td>
+        <td><%= usage.date.to_formatted_s(:long) %></td>
         <td><%= usage.purchase %></td>
-        <td><%= usage.amount %></td>
+        <td><%= number_to_currency(usage.amount) %></td>
         <td>
           <a href="/usages/<%= usage.id %>" class="btn btn-primary">Show</a>
           <a href="/usages/<%= usage.id %>/edit" class="btn btn-warning">Edit</a>

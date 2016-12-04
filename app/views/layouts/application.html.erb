@@ -12,6 +12,66 @@
     body {
       padding-top: 60px;
     }
+
+    .landing_welcome {
+      height: 300px;
+      background-image: url("https://omgtrends.files.wordpress.com/2013/12/gift-card-display.jpg");
+      background-size: cover;
+      column-span: all;
+    }
+    .landing_welcome-align {
+      margin-top: 100px;
+    }
+    .andy-center {
+      text-align: center;
+    }
+
+    .andy-outline div {
+      border: 1px solid #000;
+    }
+
+    .andy-outline {
+      padding-top: 30px;
+    }
+    .andy-padding {
+      padding-top: 20px;
+      height: 83px;
+    }
+
+    .landing_theme {
+      height: 180px;
+    }
+    .landing_theme_search {
+      height: inherit;
+      padding-top: 55px;
+      color: white;
+      text-shadow: 2px 2px #000000;
+    }
+    .movies-background {
+      background-image: url("http://blog.coralspringsresort.com/wp-content/uploads/2014/05/atthemovies.jpg");
+      background-size: cover;
+    }
+    .food-background {
+      background-image: url("https://makedoandspend.files.wordpress.com/2012/02/img_6882.jpg");
+      background-size: cover;;
+    }
+    .home_improvement-background {
+      background-image: url("http://s.hswstatic.com/gif/home-improve-deduction-1-orig.jpg");
+      background-size: cover;
+    }
+    .electronics-background {
+      background-image: url("http://blog.idrsolutions.com/wp-content/uploads/2014/07/Lifestyle.jpg");
+      background-size: cover;
+    }
+    .groceries-background{
+      background-image: url("http://zerodollarstuff.com/wp-content/uploads/2016/05/ways-to-save-on-groceries.jpg");
+      background-size: cover;
+    }
+    .department_store-background {
+      background-image: url("http://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2016/04/12/103541834-2016_Sonoma_ReLaunch_Menom_Falls_PR-0112.530x298.jpg?v=1460487871");
+      background-size: cover;
+    }
+
   </style>
 
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -38,24 +98,23 @@
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
+      <% if current_user != nil %>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/retailers">Retailers</a></li>
-          <li><a href="/themes">Themes</a></li>
-          <li><a href="/usages">Usages</a></li>
-          <li><a href="/giftings">Giftings</a></li>
-          <li><a href="/givers">Givers</a></li>
-          <li><a href="/giftcards">Giftcards</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/giftcards"><i class="fa fa-credit-card" aria-hidden="true"></i> My Giftcards</a></li>
+          <li><a href="/givers"><i class="fa fa-gift" aria-hidden="true"></i> Giver List</a></li>
+          <li><a href="/usages"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Usage History</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <% if current_user != nil %>
-            <li><a href="/users/edit"><i class="fa fa-user-plus" aria-hidden="true"></i>  <%= current_user.first_name %></a></li>
-            <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sign Out</a></li>
-            <% else %>
-            <li><a href="/users/sign_in">Sign In</a></li>
-            <li><a href="/users/sign_up">Sign Up</a></li>
+          <li><a href="/users/edit"><i class="fa fa-user-plus" aria-hidden="true"></i>  <%= current_user.first_name %></a></li>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="fa fa-sign-out" aria-hidden="true"></i>  Sign Out</a></li>
+        </ul>
+          <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/users/sign_in">Sign In</a></li>
+          <li><a href="/users/sign_up">Sign Up</a></li>
+        </ul>
           <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
@@ -79,5 +138,7 @@
 
     <%= yield %>
   </div>
+
+
 </body>
 </html>

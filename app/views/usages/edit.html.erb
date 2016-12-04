@@ -19,13 +19,7 @@
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
       <!-- Label and input for giftcard_id -->
-      <div class="form-group">
-        <label for="giftcard_id" class="control-label">
-          Giftcard
-        </label>
-
-        <input type="text" id="giftcard_id" name="giftcard_id" placeholder="Giftcard" class="form-control" value="<%= @usage.giftcard_id %>">
-      </div>
+        <input type="hidden" id="giftcard_id" name="giftcard_id" value="<%= @usage.giftcard_id %>">
 
       <!-- Label and input for date -->
       <div class="form-group">
@@ -33,7 +27,7 @@
           Date
         </label>
 
-        <input type="date" id="date" name="date" placeholder="Date" class="form-control" value="<%= @usage.date %>">
+        <input type="date" id="date" name="date" placeholder="Date" class="form-control" value="<%= @usage.date.to_formatted_s(:long) %>">
       </div>
 
       <!-- Label and input for purchase -->
@@ -51,7 +45,7 @@
           Amount
         </label>
 
-        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @usage.amount %>">
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= number_to_currency(@usage.amount) %>">
       </div>
 
       <!-- Label and input for user_id -->

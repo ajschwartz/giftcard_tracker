@@ -26,7 +26,6 @@
         <label for="amount" class="control-label">
           Amount
         </label>
-
         <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @giftcard.amount %>">
       </div>
 
@@ -35,7 +34,6 @@
         <label for="retailer_id" class="control-label">
           Retailer
         </label>
-
         <%= select_tag(:retailer_id, options_from_collection_for_select(Retailer.all, :id, :name, @giftcard.retailer_id), :class => "form-control") %>
       </div>
 
@@ -44,7 +42,6 @@
         <label for="date" class="control-label">
           Date Received
         </label>
-
           <input type="date" class='form-control' id="date" name="date">
 
       </div>
@@ -54,7 +51,6 @@
         <label for="theme_id" class="control-label">
           Theme
         </label>
-
         <%= select_tag(:theme_id, options_from_collection_for_select(Theme.all, :id, :category, @giftcard.theme_id), :class => "form-control") %>
       </div>
 
@@ -63,7 +59,6 @@
         <label for="code" class="control-label">
           Code
         </label>
-
         <input type="text" id="code" name="code" placeholder="Code" class="form-control" value="<%= @giftcard.code %>">
       </div>
 
@@ -72,7 +67,6 @@
         <label for="expiration" class="control-label">
           Expiration <small> (optional) </small>
         </label>
-
         <input type="date" id="expiration" name="expiration" class="form-control">
       </div>
 
@@ -81,7 +75,6 @@
         <label for="cardcvv" class="control-label">
           Card CVV <small> (optional) </small>
         </label>
-
         <input type="text" id="cardcvv" name="cardcvv" placeholder="Card CVV" class="form-control" value="<%= @giftcard.cardcvv %>">
       </div>
 
@@ -90,7 +83,6 @@
         <label for="notes" class="control-label">
           Notes <small> (optional) </small>
         </label>
-
         <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @giftcard.notes %></textarea>
       </div>
 

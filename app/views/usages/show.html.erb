@@ -9,13 +9,13 @@
       <dd><%= @usage.giftcard.code %></dd>
 
       <dt>Date Used</dt>
-      <dd><%= @usage.date %></dd>
+      <dd><%= @usage.date.to_formatted_s(:long) %></dd>
 
       <dt>Purchase</dt>
       <dd><%= @usage.purchase %></dd>
 
       <dt>Amount</dt>
-      <dd><%= @usage.amount %></dd>
+      <dd><%= number_to_currency(@usage.amount) %></dd>
 
     </dl>
 
