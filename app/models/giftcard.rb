@@ -10,9 +10,14 @@ class Giftcard < ActiveRecord::Base
     belongs_to :user
     belongs_to :theme
     has_many :gifters, :through => :giftings, :source => :giver
+    has_many :giftings
 
     def card_display
       "#{retailer.name}, #{ActionController::Base.helpers.number_to_currency(amount)}"
+    end
+
+    def current_balance
+      "#{giftcard.amount} - #{Usage.where("giftcard_id = ?", giftcard.id).amount.sum}"
     end
 
 end

@@ -1,4 +1,4 @@
-<div class="container-fluid andy-center">
+<div class="container-fluid andy-center-all">
     <div class="row">
         <div class="col-md-8 landing_welcome">
         </div>
@@ -6,19 +6,56 @@
           <h2 class="landing_welcome-align">Welcome to your page, <%=current_user.first_name %>!</h2>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-12">
-              <h5>Link for adding new gift card</h5>
+    <div class="row landing-core">
+      <div class="col-md-7">
+
+        <ul class="nav nav-tabs nav-justified">
+          <li class="active"><a href="#recently_added" data-toggle="tab">Recently Added</a></li>
+          <li><a href="#upcoming_expiring" data-toggle="tab">Upcoming Expiring</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade active in" id="recently_added">
+            <table class="table table-striped table-hover">
+              <tr class="andy-center">
+                <th>Retailer</th>
+                <th>Amount</th>
+                <th>Actions</th>
+              </tr>
+
+              <% @giftcards.each do |giftcard| %>
+              <% if giftcard.user_id == current_user.id && giftcard.amount != 0 %>
+              <tr>
+                <td><%= giftcard.retailer.name %></td>
+                <td><%= number_to_currency(giftcard.amount) %></td>
+                <td>
+                  <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary btn-sm"><i class="fa fa-info" aria-hidden="true"></i></a>
+                  <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <a href="/delete_giftcard/<%= giftcard.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+              <% else %>
+              <% end %>
+              <% end %>
+            </table>
+
           </div>
-            <div class="col-md-12">
-              <h5>Link for logging use of existing gift card</h5>
-            </div>
+          <div class="tab-pane fade" id="upcoming_expiring">
+            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
           </div>
         </div>
-        <div class="col-md-6">
-          <h5>Upcoming expiring or recently added gift cards</h5>
+
+      </div>
+        <div class="col-md-5">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Receive something special from a special someone?</h4>
+                <a href="giftcards/new" class="btn btn-success btn-lg btn-block">Add a new giftcard</a>
+          </div>
+            <div class="col-md-12">
+              <h4>Use one of your giftcards?</h4>
+              <a href="usages/new" class="btn btn-warning btn-lg btn-block">Record a giftcard use</a>
+            </div>
+          </div>
         </div>
     </div>
     <div class="row">
@@ -28,24 +65,24 @@
     </div>
     <div class="row landing_theme">
         <div class="col-md-4 landing_theme_search food-background">
-          <h3>Food</h3>
+          <a href="giftcardstheme/1"><h3>Food</h3></a>
         </div>
         <div class="col-md-4 landing_theme_search movies-background">
-          <h3>Movies</h3>
+          <a href="giftcardstheme/4"><h3>Movies</h3></a>
         </div>
         <div class="col-md-4 landing_theme_search home_improvement-background">
-          <h3>Home Improvement</h3>
+          <a href="giftcardstheme/7"><h3>Home Improvement</h3></a>
         </div>
     </div>
     <div class="row landing_theme">
         <div class="col-md-4 landing_theme_search electronics-background">
-          <h3>Electronics</h3>
+          <a href="giftcardstheme/3"><h3>Electronics</h3></a>
         </div>
         <div class="col-md-4 landing_theme_search department_store-background">
-          <h3>Department Store</h3>
+          <a href="giftcardstheme/6"><h3>Department Store</h3></a>
         </div>
         <div class="col-md-4 landing_theme_search groceries-background">
-          <h3>Groceries</h3>
+          <a href="giftcardstheme/5"><h3>Groceries</h3></a>
         </div>
     </div>
     <div class="row">

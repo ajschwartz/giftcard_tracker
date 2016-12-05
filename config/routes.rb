@@ -98,6 +98,7 @@ Rails.application.routes.draw do
   # READ
   get "/giftcards", :controller => "giftcards", :action => "index"
   get "/giftcards/:id", :controller => "giftcards", :action => "show"
+  get "/giftcardstheme/:theme_id", :controller => "giftcards", :action => "index_theme"
 
   # UPDATE
   get "/giftcards/:id/edit", :controller => "giftcards", :action => "edit"

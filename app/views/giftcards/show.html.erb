@@ -1,49 +1,162 @@
 <div class="page-header">
-  <h3>Giftcard #<%= @giftcard.id %></h3>
+  <h3>Your <strong><%= @giftcard.retailer.name %></strong> giftcard:</h3>
 </div>
 
 <div class="row">
-  <div class="col-md-12 mb-2">
-    <dl class="dl-horizontal">
-      <dt>User</dt>
-      <dd><%= @giftcard.user.username %></dd>
+  <div class="col-md-offset-1 col-md-10">
+    <ul class="nav nav-tabs nav-justified">
+      <li class="active"><a href="#giftcard_details" data-toggle="tab">Giftcard Details</a></li>
+      <li><a href="#usage_history" data-toggle="tab">Usage History</a></li>
+      <li><a href="#received_from" data-toggle="tab">Received from...</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="giftcard_details">
+        <dl class="dl-horizontal">
+          <dt>Amount</dt>
+          <dd><%= number_to_currency(@giftcard.amount) %></dd>
+          <dt>Date Received</dt>
+          <dd><%= @giftcard.date.to_formatted_s(:long) %></dd>
+          <dt>Code</dt>
+          <dd><%= @giftcard.code %></dd>
+          <dt>Expiration</dt>
+          <dd><%= @giftcard.expiration %></dd>
+          <dt>Card CVV</dt>
+          <dd><%= @giftcard.cardcvv %></dd>
+          <dt>Notes</dt>
+          <dd><%= @giftcard.notes %></dd>
+          <dt>Theme</dt>
+          <dd><%= @giftcard.theme.category %></dd>
+        </dl>
 
-      <dt>Amount</dt>
-      <dd><%= number_to_currency(@giftcard.amount) %></dd>
+        <div class="btn-group btn-group-justified">
+          <a href="/giftcards/<%= @giftcard.id %>/edit" class="btn btn-warning">
+            Edit
+          </a>
+          <a href="/delete_giftcard/<%= @giftcard.id %>" class="btn btn-danger" rel="nofollow">
+            Delete
+          </a>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="usage_history">
+        <div class="col-md-8">
+          <table class="table table-striped table-hover">
+            <tr class="andy-center">
+              <th>Amount</th>
+              <th>Date</th>
+              <th>Purchase</th>
+              <th>Edit</th>
+            </tr>
 
-      <dt>Date</dt>
-      <dd><%= @giftcard.date.to_formatted_s(:long) %></dd>
+            <% @giftcard.usages.each do |usage| %>
+            <tr>
+              <td><%= number_to_currency(usage.amount) %></td>
+              <td><%= usage.date %></td>
+              <td><%= usage.purchase %></td>
+              <td>
+                <a href="/usages/<%= usage.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                <a href="/delete_usage/<%= usage.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <form action="/create_usage" class="form-horizontal" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <dt>Retailer</dt>
-      <dd><%= @giftcard.retailer.name %></dd>
+            <!-- Label and input for giftcard_id -->
+            <input type="hidden" id="giftcard_id" name="giftcard_id" value="<%= @giftcard.id %>">
 
-      <dt>Code</dt>
-      <dd><%= @giftcard.code %></dd>
+            <!-- Label and input for date -->
+            <div class="form-group">
+              <label for="date" class="control-label">
+                Date Used
+              </label>
 
-      <dt>Expiration</dt>
-      <dd><%= @giftcard.expiration %></dd>
+              <input type="date" id="date" name="date" placeholder="Date" class="form-control">
+            </div>
 
-      <dt>Card CVV</dt>
-      <dd><%= @giftcard.cardcvv %></dd>
+            <!-- Label and input for purchase -->
+            <div class="form-group">
+              <label for="purchase" class="control-label">
+                Purchase
+              </label>
 
-      <dt>Notes</dt>
-      <dd><%= @giftcard.notes %></dd>
+              <input type="text" id="purchase" name="purchase" placeholder="Purchase" class="form-control">
+            </div>
 
-      <dt>Theme</dt>
-      <dd><%= @giftcard.theme.category %></dd>
+            <!-- Label and input for amount -->
+            <div class="form-group">
+              <label for="amount" class="control-label">
+                Amount
+              </label>
 
-    </dl>
+              <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control">
+            </div>
 
-    <div class="btn-group btn-group-justified">
-      <a href="/giftcards" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/giftcards/<%= @giftcard.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_giftcard/<%= @giftcard.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+            <!-- Label and input for user_id -->
+            <input type="hidden" id="user_id" name="user_id" value="<%= current_user.id %>">
+
+            <button class="btn btn-success btn-block">
+              Record Usage
+            </button>
+          </form>
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="received_from">
+        <div class="col-md-8">
+          <table class="table table-striped table-hover">
+            <tr class="andy-center">
+              <th>Giver</th>
+              <th>Email</th>
+              <th>Update</th>
+            </tr>
+
+            <% @giftcard.giftings.each do |gifting| %>
+            <tr>
+              <td><%= gifting.giver.name %></td>
+              <td><%= gifting.giver.email %></td>
+              <td>
+                <a href="/delete_gifting/<%= gifting.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+        <div class="col-md-4">
+          <form action="/create_giver" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <!-- Label and input for name -->
+            <div class="form-group">
+              <label for="name" class="control-label">
+                Name
+              </label>
+
+              <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+            </div>
+
+            <!-- Label and input for email -->
+            <div class="form-group">
+              <label for="email" class="control-label">
+                Email <small>(optional)</small>
+              </label>
+
+              <input type="text" id="email" name="email" placeholder="Email" class="form-control">
+            </div>
+
+            <!-- Label and input for user_id -->
+            <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
+
+            <button class="btn btn-success btn-block">
+              Add this Giver!
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

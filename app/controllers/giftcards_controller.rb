@@ -5,6 +5,12 @@ class GiftcardsController < ApplicationController
     render("giftcards/index.html.erb")
   end
 
+  def index_theme
+    @giftcards = Giftcard.where(:theme_id=>params[:theme_id])
+    @theme=Theme.find(params[:theme_id])
+    render("giftcards/index_theme.html.erb")
+  end
+
   def show
     @giftcard = Giftcard.find(params[:id])
 

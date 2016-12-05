@@ -1,15 +1,9 @@
-<div class="page-header">
-  <h1>
-    Givers
-    <a href="/givers/new" class="btn btn-lg btn-success">New Giver</a>
-  </h1>
-</div>
-
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-9">
     <table class="table table-striped table-hover">
       <tr>
         <th>Name</th>
+        <th>Giftcards Given</th>
         <th>Email</th>
         <th>Actions</th>
       </tr>
@@ -18,16 +12,58 @@
       <% if giver.user_id == current_user.id %>
       <tr>
         <td><%= giver.name %></td>
+        <td> <ul>
+          <% giver.gifts.each do |gift| %>
+            <li><%=gift.retailer.name %> for <%=number_to_currency(gift.amount) %> on <%=gift.date.to_formatted_s(:long)%></li>
+          <% end %>
+          </ul>
+        </td>
         <td><%= giver.email %></td>
         <td>
-          <a href="/givers/<%= giver.id %>" class="btn btn-primary">Show</a>
-          <a href="/givers/<%= giver.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_giver/<%= giver.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <a href="/givers/<%= giver.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+          <a href="/delete_giver/<%= giver.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i>
+          </a>
         </td>
       </tr>
       <% else %>
       <% end %>
       <% end %>
     </table>
+  </div>
+
+  <div class="col-md-3">
+    <div class="well well-sm">
+      <h4>New giver? Add one here!</h4>
+    </div>
+    <form action="/create_giver" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+      </div>
+
+      <!-- Label and input for email -->
+      <div class="form-group">
+        <label for="email" class="control-label">
+          Email <small>(optional)</small>
+        </label>
+
+        <input type="text" id="email" name="email" placeholder="Email" class="form-control">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
+
+      <button class="btn btn-success">
+        New Giver
+      </button>
+    </form>
   </div>
 </div>

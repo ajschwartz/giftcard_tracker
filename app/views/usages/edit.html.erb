@@ -27,7 +27,7 @@
           Date
         </label>
 
-        <input type="date" id="date" name="date" placeholder="Date" class="form-control" value="<%= @usage.date.to_formatted_s(:long) %>">
+        <input type="date" id="date" name="date" placeholder="Date" class="form-control" value="<%= @usage.date %>">
       </div>
 
       <!-- Label and input for purchase -->
@@ -45,7 +45,7 @@
           Amount
         </label>
 
-        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= number_to_currency(@usage.amount) %>">
+        <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @usage.amount %>">
       </div>
 
       <!-- Label and input for user_id -->
