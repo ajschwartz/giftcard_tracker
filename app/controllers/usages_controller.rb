@@ -1,6 +1,6 @@
 class UsagesController < ApplicationController
   def index
-    @usages = Usage.all
+    @usages = Usage.order(:date=>:desc)
 
     render("usages/index.html.erb")
   end
@@ -28,10 +28,10 @@ class UsagesController < ApplicationController
 
     save_status = @usage.save
 
-    if save_status == true
-      redirect_to("/usages/#{@usage.id}", :notice => "Usage created successfully.")
+    if save_status == true && URI(request.referer).path == "/usages/new"
+      redirect_to("/usages", :notice => "Usage created successfully.")
     else
-      render("usages/new.html.erb")
+      redirect_to(:back, :notice => "Usage created.")
     end
   end
 

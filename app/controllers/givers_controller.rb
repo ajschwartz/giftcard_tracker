@@ -61,7 +61,7 @@ class GiversController < ApplicationController
     @giver.destroy
 
     if URI(request.referer).path == "/givers/#{@giver.id}"
-      redirect_to("/", :notice => "Giver deleted.")
+      redirect_to("/givers", :notice => "Giver deleted.")
     else
       redirect_to(:back, :notice => "Giver deleted.")
     end

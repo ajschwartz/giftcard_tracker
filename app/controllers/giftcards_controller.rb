@@ -13,6 +13,7 @@ class GiftcardsController < ApplicationController
 
   def show
     @giftcard = Giftcard.find(params[:id])
+    @gifting = Gifting.new
 
     render("giftcards/show.html.erb")
   end
@@ -39,7 +40,7 @@ class GiftcardsController < ApplicationController
     save_status = @giftcard.save
 
     if save_status == true
-      redirect_to("/giftcards/#{@giftcard.id}", :notice => "Giftcard created successfully.")
+      redirect_to("/giftcards", :notice => "Giftcard created successfully.")
     else
       render("giftcards/new.html.erb")
     end

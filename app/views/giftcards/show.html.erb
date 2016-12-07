@@ -12,8 +12,10 @@
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade active in" id="giftcard_details">
         <dl class="dl-horizontal">
-          <dt>Amount</dt>
+          <dt>Original Amount</dt>
           <dd><%= number_to_currency(@giftcard.amount) %></dd>
+          <dt>Remaining Balance</dt>
+          <dd><%= number_to_currency(@giftcard.current_balance) %></dd>
           <dt>Date Received</dt>
           <dd><%= @giftcard.date.to_formatted_s(:long) %></dd>
           <dt>Code</dt>
@@ -50,7 +52,7 @@
             <% @giftcard.usages.each do |usage| %>
             <tr>
               <td><%= number_to_currency(usage.amount) %></td>
-              <td><%= usage.date %></td>
+              <td><%= usage.date.to_formatted_s(:long)  %></td>
               <td><%= usage.purchase %></td>
               <td>
                 <a href="/usages/<%= usage.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
@@ -126,6 +128,32 @@
           </table>
         </div>
         <div class="col-md-4">
+
+          <form action="/create_gifting" method="post">
+            <!-- Hidden input for authenticity token to protect from forgery -->
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+            <!-- Label and input for giver_id -->
+            <div class="form-group">
+              <label for="giver_id" class="control-label">
+                Giver
+              </label>
+
+              <%= select_tag(:giver_id, options_from_collection_for_select(Giver.where("user_id = ?", current_user.id), :id, :name, @gifting.giver_id), :class => "form-control") %>
+            </div>
+
+            <!-- Label and input for giftcard_id -->
+            <input type="hidden" id="giftcard_id" name="giftcard_id" class="form-control" value="<%= @giftcard.id %>">
+
+            <button class="btn btn-success">
+              Add this giver!
+            </button>
+          </form>
+
+          <div>
+            <h4>If the giver is not in the list above, add them here:</h4>
+          </div>
+
           <form action="/create_giver" method="post">
             <!-- Hidden input for authenticity token to protect from forgery -->
             <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -152,11 +180,14 @@
             <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
 
             <button class="btn btn-success btn-block">
-              Add this Giver!
+              Create and add this giver!
             </button>
           </form>
         </div>
       </div>
     </div>
   </div>
+</div>
+<div>
+  <h1> </h1>
 </div>

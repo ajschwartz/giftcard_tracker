@@ -40,7 +40,30 @@
 
           </div>
           <div class="tab-pane fade" id="upcoming_expiring">
-            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
+            <table class="table table-striped table-hover">
+              <tr class="andy-center">
+                <th>Retailer</th>
+                <th>Amount</th>
+                <th>Expiration</th>
+                <th>Actions</th>
+              </tr>
+
+              <% @expirings.each do |expiring| %>
+              <% if expiring.user_id == current_user.id && expiring.amount != 0 %>
+              <tr>
+                <td><%= expiring.retailer.name %></td>
+                <td><%= number_to_currency(expiring.amount) %></td>
+                <td><%= expiring.expiration.to_formatted_s(:long) %></td>
+                <td>
+                  <a href="/giftcards/<%= expiring.id %>" class="btn btn-primary btn-sm"><i class="fa fa-info" aria-hidden="true"></i></a>
+                  <a href="/giftcards/<%= expiring.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                  <a href="/delete_giftcard/<%= expiring.id %>" class="btn btn-danger btn-sm" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                </td>
+              </tr>
+              <% else %>
+              <% end %>
+              <% end %>
+            </table>
           </div>
         </div>
 
@@ -59,8 +82,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <h4>Search for specific gift card (this will be by retailer) or search below by category</h4>
+        <div class="col-md-12 btn btn-primary disabled">
+          <h4>DO A QUICK SEARCH OF YOUR GIFTCARDS BY CATEGORY:</h4>
         </div>
     </div>
     <div class="row landing_theme">
@@ -85,12 +108,24 @@
           <a href="giftcardstheme/5"><h3>Groceries</h3></a>
         </div>
     </div>
-    <div class="row">
+    <div class="row landing-bottom">
         <div class="col-md-6">
-          <h5>Static bottom part of the page with various links</h5>
+          <h4>Connection Center</h4>
+          <ul class="list-unstyled">
+            <li>Raise</li>
+            <li>Twitter</li>
+            <li>Facebook</li>
+            <li>Google+</li>
+          </ul>
         </div>
         <div class="col-md-6">
-          <h5>Static bottom part of the page with various links</h5>
+          <h4>Customer Support</h4>
+          <ul class="list-unstyled">
+            <li>Help Center</li>
+            <li>Getting Started</li>
+            <li>Contact Us</li>
+            <li>Privacy & Terms</li>
+          </ul>
         </div>
     </div>
 </div>

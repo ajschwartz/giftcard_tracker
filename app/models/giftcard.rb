@@ -1,6 +1,6 @@
 class Giftcard < ActiveRecord::Base
 
-    validates :amount, :presence => true
+    validates :amount, :presence => true, :numericality => {:greater_than_or_equal_to => 0}
     validates :date, :presence => true
     validates :code, :presence => true
     validates :retailer_id, :presence => true
@@ -17,7 +17,7 @@ class Giftcard < ActiveRecord::Base
     end
 
     def current_balance
-      "#{giftcard.amount} - #{Usage.where("giftcard_id = ?", giftcard.id).amount.sum}"
+      amount-usages.sum(:amount)
     end
 
 end

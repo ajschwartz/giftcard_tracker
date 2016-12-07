@@ -6,73 +6,72 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr class="andy-center">
-        <th>Retailer</th>
-        <th>Current Balance</th>
-        <th>Expiration</th>
-        <th>Usage History</th>
-        <th>Actions</th>
-      </tr>
+  <div class="col-md-10 col-md-offset-1">
+    <ul class="nav nav-tabs nav-justified">
+      <li class="active"><a href="#giftcards" data-toggle="tab">Giftcards Available</a></li>
+      <li><a href="#used_giftcards" data-toggle="tab">Used Giftcards</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="giftcards">
+        <table class="table table-striped table-hover">
+          <tr class="andy-center">
+            <th>Retailer</th>
+            <th>Balance</th>
+            <th>Expiration</th>
+            <th>Usage History</th>
+            <th>Actions</th>
+          </tr>
 
-      <% @giftcards.each do |giftcard| %>
-      <% if giftcard.user_id == current_user.id && giftcard.amount != 0 %>
-      <tr>
-        <td><%= giftcard.retailer.name %></td>
-        <td><%= number_to_currency(giftcard.amount) %></td>
-        <td><%= giftcard.expiration %></td>
-        <td><ul><% giftcard.usages.each do |usage| %>
-          <li><%=number_to_currency(usage.amount) %> on <%=usage.date.to_formatted_s(:long)%></li>
-        <% end %></ul></td>
-        <td>
-          <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></a>
-          <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-          <a href="/delete_giftcard/<%= giftcard.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-        </td>
-      </tr>
-      <% else %>
-      <% end %>
-      <% end %>
-    </table>
-  </div>
-</div>
+          <% @giftcards.each do |giftcard| %>
+          <% if giftcard.user_id == current_user.id && giftcard.current_balance > 0 %>
+          <tr>
+            <td><%= giftcard.retailer.name %></td>
+            <td><%= number_to_currency(giftcard.current_balance) %></td>
+            <td><%= giftcard.expiration %></td>
+            <td><ul><% giftcard.usages.each do |usage| %>
+              <li><%=number_to_currency(usage.amount) %> on <%=usage.date.to_formatted_s(:long)%></li>
+              <% end %></ul></td>
+              <td>
+                <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></a>
+                <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                <a href="/delete_giftcard/<%= giftcard.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            <% else %>
+            <% end %>
+            <% end %>
+          </table>
+        </div>
+        <div class="tab-pane fade" id="used_giftcards">
+          <table class="table table-striped table-hover">
+            <tr class="andy-center">
+              <th>Retailer</th>
+              <th>Original Balance</th>
+              <th>Date Received</th>
+              <th>Usage History</th>
+              <th>Actions</th>
+            </tr>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="well">
-      <strong> Used Gift Cards </strong>
+            <% @giftcards.each do |giftcard| %>
+            <% if giftcard.current_balance <= 0 %>
+            <tr>
+              <td><%= giftcard.retailer.name %></td>
+              <td><%= number_to_currency(giftcard.amount) %></td>
+              <td><%= giftcard.date.to_formatted_s(:long)%></td>
+              <td><ul><% giftcard.usages.each do |usage| %>
+                <li><%=number_to_currency(usage.amount) %> on <%=usage.date.to_formatted_s(:long)%></li>
+                <% end %></ul></td>
+              <td>
+                <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary"><i class="fa fa-info" aria-hidden="true"></i></a>
+                <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                <a href="/delete_giftcard/<%= giftcard.id %>" class="btn btn-danger" rel="nofollow"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              </td>
+            </tr>
+            <% else %>
+            <% end %>
+            <% end %>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-striped table-hover">
-      <tr class="andy-center">
-        <th>Retailer</th>
-        <th>Amount</th>
-        <th>Date Received</th>
-        <th>Notes</th>
-        <th>Actions</th>
-      </tr>
-
-      <% @giftcards.each do |giftcard| %>
-      <% if giftcard.amount == 0 %>
-      <tr>
-        <td><%= giftcard.retailer.name %></td>
-        <td><%= number_to_currency(giftcard.amount) %></td>
-        <td><%= giftcard.date.to_formatted_s(:long)%></td>
-        <td><%= giftcard.notes %></td>
-        <td>
-          <a href="/giftcards/<%= giftcard.id %>" class="btn btn-primary">Show</a>
-          <a href="/giftcards/<%= giftcard.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_giftcard/<%= giftcard.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
-        </td>
-      </tr>
-      <% else %>
-      <% end %>
-      <% end %>
-    </table>
-  </div>
-</div>

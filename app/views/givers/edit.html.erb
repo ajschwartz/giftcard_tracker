@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Giver #<%= @giver.id %></h3>
+  <h3>Edit profile for: <strong><%= @giver.name %></strong> </h3>
 </div>
 
 <div class="row">
@@ -43,7 +43,7 @@
         Update Giver
       </button>
       or
-      <a href="/givers/<%= @giver.id %>">Cancel</a>
+      <a href="/givers">Cancel</a>
     </form>
   </div>
 </div>

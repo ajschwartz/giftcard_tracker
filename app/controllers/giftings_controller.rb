@@ -25,10 +25,10 @@ class GiftingsController < ApplicationController
 
     save_status = @gifting.save
 
-    if save_status == true
+    if save_status == true && URI(request.referer).path == "/giftings/new"
       redirect_to("/giftings/#{@gifting.id}", :notice => "Gifting created successfully.")
     else
-      render("giftings/new.html.erb")
+      redirect_to(:back, :notice => "Giver added.")
     end
   end
 
