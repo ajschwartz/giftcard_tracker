@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <form action="/update_usage/<%= @usage.id %>" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -26,8 +26,12 @@
         <label for="date" class="control-label">
           Date
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
         <input type="date" id="date" name="date" placeholder="Date" class="form-control" value="<%= @usage.date %>">
+      </div>
       </div>
 
       <!-- Label and input for purchase -->
@@ -35,8 +39,12 @@
         <label for="purchase" class="control-label">
           Purchase
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+          </span>
         <input type="text" id="purchase" name="purchase" placeholder="Purchase" class="form-control" value="<%= @usage.purchase %>">
+      </div>
       </div>
 
       <!-- Label and input for amount -->
@@ -44,8 +52,12 @@
         <label for="amount" class="control-label">
           Amount
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-usd"></span>
+          </span>
         <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control" value="<%= @usage.amount %>">
+      </div>
       </div>
 
       <!-- Label and input for user_id -->

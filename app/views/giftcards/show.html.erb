@@ -21,7 +21,7 @@
           <dt>Code</dt>
           <dd><%= @giftcard.code %></dd>
           <dt>Expiration</dt>
-          <dd><%= @giftcard.expiration %></dd>
+          <dd><%= @giftcard.expiration.to_formatted_s(:long) %></dd>
           <dt>Card CVV</dt>
           <dd><%= @giftcard.cardcvv %></dd>
           <dt>Notes</dt>
@@ -75,17 +75,12 @@
               <label for="date" class="control-label">
                 Date Used
               </label>
-
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
               <input type="date" id="date" name="date" placeholder="Date" class="form-control">
             </div>
-
-            <!-- Label and input for purchase -->
-            <div class="form-group">
-              <label for="purchase" class="control-label">
-                Purchase
-              </label>
-
-              <input type="text" id="purchase" name="purchase" placeholder="Purchase" class="form-control">
             </div>
 
             <!-- Label and input for amount -->
@@ -93,8 +88,25 @@
               <label for="amount" class="control-label">
                 Amount
               </label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-usd"></span>
+                </span>
+                <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control">
+              </div>
+            </div>
 
-              <input type="text" id="amount" name="amount" placeholder="Amount" class="form-control">
+            <!-- Label and input for purchase -->
+            <div class="form-group">
+              <label for="purchase" class="control-label">
+                Purchase
+              </label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-shopping-cart"></span>
+                </span>
+              <input type="text" id="purchase" name="purchase" placeholder="Purchase" class="form-control">
+            </div>
             </div>
 
             <!-- Label and input for user_id -->
@@ -138,8 +150,12 @@
               <label for="giver_id" class="control-label">
                 Giver
               </label>
-
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-gift"></span>
+                </span>
               <%= select_tag(:giver_id, options_from_collection_for_select(Giver.where("user_id = ?", current_user.id), :id, :name, @gifting.giver_id), :class => "form-control") %>
+            </div>
             </div>
 
             <!-- Label and input for giftcard_id -->
@@ -163,8 +179,12 @@
               <label for="name" class="control-label">
                 Name
               </label>
-
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-user"></span>
+                </span>
               <input type="text" id="name" name="name" placeholder="Name" class="form-control">
+            </div>
             </div>
 
             <!-- Label and input for email -->
@@ -172,15 +192,19 @@
               <label for="email" class="control-label">
                 Email <small>(optional)</small>
               </label>
-
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-envelope"></span>
+                </span>
               <input type="text" id="email" name="email" placeholder="Email" class="form-control">
+            </div>
             </div>
 
             <!-- Label and input for user_id -->
             <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= current_user.id %>">
 
             <button class="btn btn-success btn-block">
-              Create and add this giver!
+              Create this giver!
             </button>
           </form>
         </div>

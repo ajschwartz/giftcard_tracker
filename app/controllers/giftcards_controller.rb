@@ -1,6 +1,6 @@
 class GiftcardsController < ApplicationController
   def index
-    @giftcards = Giftcard.all
+    @giftcards = Giftcard.order(:created_at=>:desc)
 
     render("giftcards/index.html.erb")
   end

@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <form action="/create_retailer" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -23,8 +23,12 @@
         <label for="name" class="control-label">
           Name
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-tags"></span>
+          </span>
         <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @retailer.name %>">
+      </div>
       </div>
 
       <!-- Label and input for website -->
@@ -32,8 +36,12 @@
         <label for="website" class="control-label">
           Website
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-option-horizontal"></span>
+          </span>
         <input type="text" id="website" name="website" placeholder="Website" class="form-control" value="<%= @retailer.website %>">
+      </div>
       </div>
 
       <button class="btn btn-success">

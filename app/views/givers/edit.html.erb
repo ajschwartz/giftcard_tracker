@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <form action="/update_giver/<%= @giver.id %>" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -23,8 +23,12 @@
         <label for="name" class="control-label">
           Name
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
         <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @giver.name %>">
+      </div>
       </div>
 
       <!-- Label and input for email -->
@@ -32,8 +36,12 @@
         <label for="email" class="control-label">
           Email
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-envelope"></span>
+          </span>
         <input type="text" id="email" name="email" placeholder="Email" class="form-control" value="<%= @giver.email %>">
+      </div>
       </div>
 
       <!-- Label and input for user_id -->

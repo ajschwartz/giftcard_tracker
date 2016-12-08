@@ -49,11 +49,11 @@
               </tr>
 
               <% @expirings.each do |expiring| %>
-              <% if expiring.user_id == current_user.id && expiring.amount != 0 %>
+              <% if expiring.user_id == current_user.id && expiring.current_balance != 0 %>
               <tr>
                 <td><%= expiring.retailer.name %></td>
                 <td><%= number_to_currency(expiring.amount) %></td>
-                <td><%= expiring.expiration.to_formatted_s(:long) %></td>
+                <td><%= expiring.expiration %></td>
                 <td>
                   <a href="/giftcards/<%= expiring.id %>" class="btn btn-primary btn-sm"><i class="fa fa-info" aria-hidden="true"></i></a>
                   <a href="/giftcards/<%= expiring.id %>/edit" class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>

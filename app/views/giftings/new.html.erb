@@ -13,7 +13,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <form action="/create_gifting" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
@@ -23,8 +23,12 @@
         <label for="giver_id" class="control-label">
           Giver
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-user"></span>
+          </span>
         <%= select_tag(:giver_id, options_from_collection_for_select(Giver.where("user_id = ?", current_user.id), :id, :name, @gifting.giver_id), :class => "form-control") %>
+      </div>
       </div>
 
       <!-- Label and input for giftcard_id -->
@@ -32,8 +36,12 @@
         <label for="giftcard_id" class="control-label">
           Giftcard
         </label>
-
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-credit-card"></span>
+          </span>
         <%= select_tag(:giftcard_id, options_from_collection_for_select(Giftcard.where("user_id = ?", current_user.id), :id, :card_display, @gifting.giftcard_id), :class => "form-control") %>
+      </div>
       </div>
 
       <button class="btn btn-success">

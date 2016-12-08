@@ -26,7 +26,7 @@ class RetailersController < ApplicationController
     save_status = @retailer.save
 
     if save_status == true
-      redirect_to("/retailers/#{@retailer.id}", :notice => "Retailer created successfully.")
+      redirect_to("/giftcards/new", :notice => "Retailer created successfully.")
     else
       render("retailers/new.html.erb")
     end

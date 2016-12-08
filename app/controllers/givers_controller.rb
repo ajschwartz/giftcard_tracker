@@ -26,10 +26,10 @@ class GiversController < ApplicationController
 
     save_status = @giver.save
 
-    if save_status == true
-      redirect_to("/givers/#{@giver.id}", :notice => "Giver created successfully.")
+    if save_status == true && URI(request.referer).path == "/givers/new"
+      redirect_to("/givers", :notice => "Giver created successfully.")
     else
-      render("givers/new.html.erb")
+      redirect_to(:back, :notice => "Giver created.")
     end
   end
 
